@@ -25,7 +25,7 @@
                         </svg>
                         Sign out
                     </a>
-                    <form id="AdminLogoutForm" action="{{ route('admin.logout') }}" method="GET">
+                    <form id="AdminLogoutForm" action="{{ route('admin.logout') }}" method="POST">
                         @csrf
                     </form>
                 </li>
