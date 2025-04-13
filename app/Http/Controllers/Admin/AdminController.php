@@ -75,7 +75,7 @@ class AdminController extends Controller
             } else {
                 // Kalau gagal login, kirim pesan error balik ke login
                 return redirect()->route('admin.login')->with([
-                    'error' => 'The Credentials do not match on our records'
+                    'error' => 'Email dan Password Tidak Terdaftar Kedalam Sistem Kami!'
                 ]);
             }
         }
