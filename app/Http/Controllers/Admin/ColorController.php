@@ -79,7 +79,7 @@ class ColorController extends Controller
     {
         $color->delete();
         return redirect()->route('admin.colors.index')->with([
-            'success' => 'Data Warna Berhasil Dihapis'
+            'success' => 'Data Warna Berhasil Dihapus'
         ]);
     }
 }
