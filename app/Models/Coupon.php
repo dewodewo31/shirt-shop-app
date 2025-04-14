@@ -24,7 +24,7 @@ class Coupon extends Model
     }
 
     // fungsi cek kupon valid
-    public function checkIfValid($value)
+    public function checkIfValid()
     {
         if ($this->valid_until > Carbon::now()) {
             return true;
