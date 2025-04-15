@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ReviewController;
 use App\Http\Controllers\Admin\SizeController;
+use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -72,4 +73,8 @@ Route::middleware('admin')->group(function () {
   Route::get('reviews', [ReviewController::class, 'index'])->name('admin.reviews.index');
   Route::get('update/{review}/{status}/review', [ReviewController::class, 'toggleApprovedStatus'])->name('admin.reviews.update');
   Route::delete('delete/{review}/review', [ReviewController::class, 'delete'])->name('admin.reviews.delete');
+
+  // users
+  Route::get('users', [UserController::class, 'index'])->name('admin.users.index');
+  Route::delete('delete/{user}/user', [UserController::class, 'delete'])->name('admin.users.delete');
 });
