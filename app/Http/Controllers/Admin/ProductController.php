@@ -68,7 +68,7 @@ class ProductController extends Controller
             $product->sizes()->sync($request->size_id);
 
             return redirect()->route('admin.products.index')->with([
-                'success' => 'Product has been added successfully'
+                'success' => 'Data Produk Berhasil Ditambahkan'
             ]);
         }
     }
@@ -135,7 +135,7 @@ class ProductController extends Controller
             $product->sizes()->sync($request->size_id);
 
             return redirect()->route('admin.products.index')->with([
-                'success' => 'Product has been updated successfully'
+                'success' => 'Data Produk Berhasil Diedit'
             ]);
         }
     }
@@ -153,7 +153,7 @@ class ProductController extends Controller
         $product->delete();
 
         return redirect()->route('admin.products.index')->with([
-            'success' => 'Product has been deleted successfully'
+            'success' => 'Data Produk Berhasil Dihapus'
         ]);
     }
 
