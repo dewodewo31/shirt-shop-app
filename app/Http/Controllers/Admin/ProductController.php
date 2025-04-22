@@ -8,7 +8,7 @@ use App\Models\Product;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CreateProductRequest;
+use App\Http\Requests\AddProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use Illuminate\Support\Facades\File;
 
@@ -40,7 +40,7 @@ class ProductController extends Controller
     /**
      * Menyimpan produk baru ke database setelah validasi.
      */
-    public function store(CreateProductRequest $request)
+    public function store(AddProductRequest $request)
     {
         if ($request->validated()) {
             $data = $request->all();
