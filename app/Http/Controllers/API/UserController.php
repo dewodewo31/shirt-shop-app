@@ -18,11 +18,25 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request)
     {
-        if ($request->validated()) {
-            User::create($request->validated());
+        try {
+            $validatedData = $request->validated();
+
+            // Hash password
+            $validatedData['password'] = Hash::make($validatedData['password']);
+
+            // Hapus password_confirmation dari data yang akan disimpan
+            unset($validatedData['password_confirmation']);
+
+            User::create($validatedData);
+
             return response()->json([
                 'message' => 'Account created successfully'
-            ]);
+            ], 201);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Registration failed',
+                'error' => $e->getMessage()
+            ], 500);
         }
     }
 
@@ -31,18 +45,24 @@ class UserController extends Controller
      */
     public function auth(AuthUserRequest $request)
     {
-        if ($request->validated()) {
-            $user = User::whereEmail($request->email)->first();
+        try {
+            $user = User::where('email', $request->email)->first();
+
             if (!$user || !Hash::check($request->password, $user->password)) {
                 return response()->json([
-                    'error' => 'These credentials do not match our records'
-                ]);
-            } else {
-                return response()->json([
-                    'user' => UserResource::make($user),
-                    'access_token' => $user->createToken('new_user')->plainTextToken
-                ]);
+                    'message' => 'Invalid credentials'
+                ], 401); // Return status 401 untuk invalid credentials
             }
+
+            return response()->json([
+                'user' => UserResource::make($user),
+                'access_token' => $user->createToken('auth_token')->plainTextToken
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Internal server error',
+                'error' => $e->getMessage()
+            ], 500);
         }
     }
 

@@ -59,7 +59,7 @@ class User extends Authenticatable
         return $this->hasMany(Order::class)->with('products')->latest();
     }
 
-    public function image_path()
+    public function getImagePathAttribute()
     {
         if ($this->profile_image) {
             return asset('storage/images/users/' . $this->profile_image);
